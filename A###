@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démonstrations PIL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .image-card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            background: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.05);
+        }
+        .image-card img {
+            max-width: 300px;
+            height: auto;
+            display: block;
+        }
+        .image-info {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Démonstrations de traitement d'images avec PIL</h1>
+        
+        <div class="image-container">
+            <!-- Exemple d'image traitée -->
+            <div class="image-card">
+                <img src="{{ url_for('static', filename='images/processed_image.jpg') }}" alt="Image traitée">
+                <div class="image-info">Image après traitement PIL</div>
+            </div>
+            
+            <!-- Vous pouvez ajouter d'autres démonstrations ici -->
+            <div class="image-card">
+                <img src="{{ url_for('static', filename='images/thumbnail.jpg') }}" alt="Miniature">
+                <div class="image-info">Miniature générée</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 4px;">
+            <h2>Fonctionnalités démontrées :</h2>
+            <ul>
+                <li>Redimensionnement d'images</li>
+                <li>Conversion de format</li>
+                <li>Application de filtres</li>
+                <li>Création de miniatures</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

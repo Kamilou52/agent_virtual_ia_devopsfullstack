@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation DevOps Full-stack</title>
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --primary: #4f46e5;
+            --surface: #ffffff;
+            --text: #102a43;
+            --muted: #64748b;
+            --shadow: 0 24px 72px rgba(15, 23, 42, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, sans-serif;
+            background: radial-gradient(circle at top left, #eef2ff 0%, #f8fafc 45%, #ffffff 100%);
+            color: var(--text);
+        }
+
+        .wrapper {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 32px 20px 120px;
+        }
+
+        .hero {
+            display: grid;
+            gap: 20px;
+            padding: 34px;
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+            border-radius: 26px;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.05;
+            margin: 0;
+        }
+
+        .hero p {
+            max-width: 780px;
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.92);
+            margin: 0;
+        }
+
+        .hero-actions {
+            display: grid;
+            gap: 14px;
+        }
+
+        .hero-action {
+            display: block;
+            padding: 18px 22px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.14);
+            color: white;
+            text-decoration: none;
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .hero-action:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.24);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 48px 0 20px;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .section-title span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+        }
+
+        .modules-grid,
+        .case-grid,
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .module-card,
+        .case-card,
+        .resource-card {
+            background: var(--surface);
+            padding: 24px;
+            border-radius: 24px;
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+        }
+
+        .module-card:hover,
+        .case-card:hover,
+        .resource-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(79, 70, 229, 0.2);
+        }
+
+        .module-card h3,
+        .case-card h3,
+        .resource-card h3 {
+            margin: 0 0 12px;
+            color: var(--primary);
+            font-size: 1.16rem;
+        }
+
+        .module-card p,
+        .case-card p,
+        .resource-card p {
+            margin: 0;
+            line-height: 1.75;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        .tag-list {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        footer {
+            margin-top: 52px;
+            padding: 26px 22px;
+            background: white;
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .assistant-button {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+            border: none;
+            color: white;
+            font-size: 1.9rem;
+            cursor: pointer;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.22);
+            display: grid;
+            place-items: center;
+            z-index: 1000;
+        }
+
+        .assistant-panel {
+            position: fixed;
+            right: 24px;
+            bottom: 104px;
+            width: min(380px, calc(100vw - 40px));
+            max-height: 580px;
+            border-radius: 26px;
+            background: white;
+            box-shadow: 0 40px 80px rgba(15, 23, 42, 0.16);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .assistant-panel.open {
+            display: flex;
+        }
+
+        .assistant-panel header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+            color: white;
+        }
+
+        .assistant-panel header h4 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .assistant-panel header button {
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .assistant-body {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 18px;
+            flex: 1;
+            min-height: 280px;
+        }
+
+        .assistant-messages {
+            display: grid;
+            gap: 12px;
+            overflow-y: auto;
+            max-height: 320px;
+        }
+
+        .message {
+            padding: 14px 16px;
+            border-radius: 18px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .message.bot {
+            background: #eef2ff;
+            color: #0f172a;
+            align-self: start;
+        }
+
+        .message.user {
+            background: #4f46e5;
+            color: white;
+            align-self: end;
+        }
+
+        .assistant-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .assistant-input input {
+            flex: 1;
+            border-radius: 999px;
+            border: 1px solid #cbd5e1;
+            padding: 14px 18px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .assistant-input button {
+            border: none;
+            border-radius: 999px;
+            background: var(--primary);
+            color: white;
+            padding: 0 18px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        @media (max-width: 760px) {
+            .wrapper {
+                padding-bottom: 180px;
+            }
+
+            .assistant-panel {
+                right: 14px;
+                left: 14px;
+                bottom: 94px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <section class="hero">
+            <div>
+                <p style="letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85; margin-bottom: 14px;">Formation auto-gérée</p>
+                <h1>Modules de training cliquables avec un assistant IA flottant</h1>
+                <p>Testez des ressources en ligne, explorez des cas concrets et utilisez l’assistant virtuel pour aller plus loin dans l’implémentation.</p>
+            </div>
+            <div class="hero-actions">
+                <a class="hero-action" href="#modules">Explorer les modules</a>                <a class="hero-action" href="/demonstrations">Voir les vidéos PédagogIA</a>                <a class="hero-action" href="#assistant">Ouvrir l’assistant</a>
+            </div>
+        </section>
+
+        <div class="section-title" id="modules"><span>1</span> Modules de formation</div>
+        <div class="modules-grid">
+            <a class="module-card" href="https://www.atlassian.com/fr/devops" target="_blank" rel="noopener noreferrer">
+                <h3>Module 1: Introduction au DevOps</h3>
+                <p>Comprendre le sens du DevOps, les rôles, les flux de valeur et les bonnes pratiques d’une culture collaborative.</p>
+                <div class="tag-list"><span class="tag">Culture</span><span class="tag">Valeur</span><span class="tag">Flux</span></div>
+            </a>
+            <a class="module-card" href="https://docs.github.com/fr/actions/learn-github-actions" target="_blank" rel="noopener noreferrer">
+                <h3>Module 2: Automatisation et CI/CD</h3>
+                <p>Exemples réels de pipeline, intégration de tests automatiques et déploiement continu vers un environnement cloud.</p>
+                <div class="tag-list"><span class="tag">CI/CD</span><span class="tag">Pipeline</span><span class="tag">Automatisation</span></div>
+            </a>
+            <a class="module-card" href="https://developer.hashicorp.com/terraform/tutorials" target="_blank" rel="noopener noreferrer">
+                <h3>Module 3: Infrastructure as Code</h3>
+                <p>Déploiement déclaratif avec Terraform, gestion de l’état et collaboration infrastructure/code.</p>
+                <div class="tag-list"><span class="tag">Terraform</span><span class="tag">IaC</span><span class="tag">Cloud</span></div>
+            </a>
+            <a class="module-card" href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">
+                <h3>Module 4: Containerisation avec Docker</h3>
+                <p>Création de conteneurs, optimisation d’images, et transition d’une application locale vers un système conteneurisé.</p>
+                <div class="tag-list"><span class="tag">Docker</span><span class="tag">Conteneurs</span><span class="tag">Images</span></div>
+            </a>
+            <a class="module-card" href="https://kubernetes.io/fr/docs/tutorials/" target="_blank" rel="noopener noreferrer">
+                <h3>Module 5: Orchestration avec Kubernetes</h3>
+                <p>Étude de cas pratique : déploiement d’applications, services, et scaling automatique avec Kubectl.</p>
+                <div class="tag-list"><span class="tag">Kubernetes</span><span class="tag">Orchestration</span><span class="tag">Cluster</span></div>
+            </a>
+            <a class="module-card" href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener noreferrer">
+                <h3>Module 6: Monitoring et Logging</h3>
+                <p>Mise en place de tableaux de bord, alertes et analyse de logs pour des services résilients.</p>
+                <div class="tag-list"><span class="tag">Monitoring</span><span class="tag">Logs</span><span class="tag">Alertes</span></div>
+            </a>
+        </div>
+
+        <div class="section-title"><span>2</span> Cas pratiques concrets</div>
+        <div class="case-grid">
+            <article class="case-card">
+                <h3>Pipeline CI/CD d'une application web</h3>
+                <p>Cas concret : tests unitaires, build Docker, déploiement automatisé et validation en production.</p>
+                <div class="tag-list"><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">Test</span></div>
+            </article>
+            <article class="case-card">
+                <h3>Provisionnement avec Terraform</h3>
+                <p>Exemple d’infrastructure déclarative pour une API, serveur de base de données et réseau sécurisé.</p>
+                <div class="tag-list"><span class="tag">Terraform</span><span class="tag">AWS</span><span class="tag">Infrastructure</span></div>
+            </article>
+            <article class="case-card">
+                <h3>Observabilité sur Kubernetes</h3>
+                <p>Implémentation Prometheus + Grafana, métriques clés et alertes opérationnelles.</p>
+                <div class="tag-list"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Observabilité</span></div>
+            </article>
+        </div>
+
+        <div class="section-title" id="assistant"><span>3</span> Ressources et support IA</div>
+        <div class="resources-grid">
+            <a class="resource-card" href="https://www.digitalocean.com/community/tutorials" target="_blank" rel="noopener noreferrer">
+                <h3>Tutoriels pas-à-pas</h3>
+                <p>Des guides pratiques pour appliquer immédiatement les concepts à vos projets.</p>
+            </a>
+            <a class="resource-card" href="https://www.freecodecamp.org/news/tag/devops/" target="_blank" rel="noopener noreferrer">
+                <h3>Articles pédagogiques</h3>
+                <p>Explications claires, retours d’expérience et solutions concrètes pour aller plus loin.</p>
+            </a>
+            <a class="resource-card" href="https://github.com/topics/devops" target="_blank" rel="noopener noreferrer">
+                <h3>Projets open source</h3>
+                <p>Étudiez des configurations réelles et adaptez-les à votre propre stack.</p>
+            </a>
+        </div>
+
+        <div class="section-title"><span>4</span> Méthode PractiKa</div>
+        <div class="case-grid">
+            <article class="case-card">
+                <h3>PracticKa : apprendre par la pratique</h3>
+                <p>La méthode PractiKa met l’accent sur l’apprentissage actif : comprendre un concept, l’appliquer sur un projet réel, documenter le résultat et améliorer le processus.</p>
+                <div class="tag-list"><span class="tag">Pratique</span><span class="tag">Expérience</span><span class="tag">Amélioration</span></div>
+            </article>
+            <article class="case-card">
+                <h3>AutodidaKtIA : Auto-apprendre par la pratique en visio</h3>
+                <p>Le concept AutodidaKtIA vient de mon expèrience des classes de formation auto-gérer en liien avec l'EPFL Extension School "Thinking and creatng wth code!"  l’accent sur l’auto-apprentissage actif : comprendre divers concepts, codes, programmes, systèmes et les appliquer sur un projet réel, documenter le résultat et améliorer le processus.</p>
+                <div class="tag-list"><span class="tag">Pratique</span><span class="tag">Expérience</span><span class="tag">Amélioration</span></div>
+            </article>
+            <article class="case-card">
+                <h3>Cas pratique : serveur Ubuntu 24.10 et surveillance SSH</h3>
+                <p>Projet stage : configuration d’un serveur Ubuntu 24.10 pour gérer des caméras via SSH avec Shinobi et ajout d’une caméra Axis via Axis IP Utility.</p>
+                <p style="margin-top: 12px; font-size: 0.92rem; color: #475569;">Inspiré du document de stage : <strong>documentationsrvCaméra02final.pdf</strong>.</p>
+                <div class="tag-list"><span class="tag">Ubuntu</span><span class="tag">Shinobi</span><span class="tag">Axis</span></div>
+            </article>
+            <article class="case-card">
+                <h3>Étapes clés illustrées</h3>
+                <p>Préparation du serveur, installation de Shinobi, configuration réseau, ajout de caméra Axis, tests, et production de documentation technique.</p>
+                <div class="tag-list"><span class="tag">Documentation</span><span class="tag">Tests</span><span class="tag">Sécurité</span></div>
+            </article>
+        </div>
+        <div class="case-grid" style="grid-template-columns: 1fr; gap: 18px; margin-top: 18px;">
+            <article class="case-card">
+                <h3>Synthèse PractiKa : étapes du projet</h3>
+                <ol style="margin: 0; padding-left: 20px; color: var(--muted); line-height: 1.75;">
+                    <li><strong>Installer Ubuntu 24.10</strong> sur le serveur et sécuriser l'accès SSH.</li>
+                    <li><strong>Configurer Shinobi</strong> pour capturer et gérer les flux des caméras.</li>
+                    <li><strong>Ajouter la caméra Axis</strong> avec Axis IP Utility et vérifier la connectivité réseau.</li>
+                    <li><strong>Tester le flux vidéo</strong> en local et à distance, puis ajuster les permissions et les ports.</li>
+                    <li><strong>Documenter le processus</strong> dans le rapport de stage et tirer les leçons pour optimiser l’installation.</li>
+                </ol>
+            </article>
+            <article class="case-card">
+                <h3>Pourquoi PractiKa fonctionne</h3>
+                <p>PractiKa combine la théorie et l’action : vous apprenez en faisant, vous corrigez en temps réel et vous formalisez vos résultats. Ce cycle renforce la compréhension et prépare à reproduire le même processus sur de nouveaux projets.</p>
+                <p style="margin-top: 12px; color: var(--muted);">Conseils PractiKa :</p>
+                <ul style="margin: 10px 0 0 20px; color: var(--muted); line-height: 1.7;">
+                    <li>Notez chaque commande et chaque paramètre important.</li>
+                    <li>Capturez les erreurs rencontrées et les solutions appliquées.</li>
+                    <li>Reliez les résultats aux objectifs du projet de stage.</li>
+                    <li>Réutilisez la même structure pour documenter d’autres configurations.</li>
+                </ul>
+            </article>
+        </div>
+        <div style="margin: 28px 0; display: flex; justify-content: center;">
+            <a href="/resources/practika" target="_blank" rel="noopener noreferrer" style="padding: 15px 24px; border-radius: 999px; background: #4f46e5; color: white; text-decoration: none; font-weight: 700; box-shadow: 0 18px 42px rgba(79, 70, 229, 0.24);">Ouvrir la ressource PractiKa (PDF)</a>
+        </div>
+        <div style="margin: 28px 0; display: flex; justify-content: center;">
+            <a href="/resources/AutodidaKtIA formation auto-guidée : cliquez, explorez, et utilisez l’assistant IA pour vos questions et besoins de ressources.</p>
+        </footer>
+    </div>
+
+    <button class="assistant-button" onclick="toggleAssistant()" aria-label="Ouvrir l'assistant IA">💬</button>
+    <div class="assistant-panel" id="assistantPanel" aria-hidden="true">
+        <header>
+            <h4>Assistant IA DevOps</h4>
+            <button type="button" onclick="toggleAssistant()">×</button>
+        </header>
+        <div class="assistant-body">
+            <div class="assistant-messages" id="assistantMessages">
+                <div class="message bot">Bonjour ! Posez une question pour obtenir une ressource pratique, un cas concret ou un guide pas-à-pas.</div>
+            </div>
+            <form class="assistant-input" id="assistantForm">
+                <input id="assistantInput" type="text" placeholder="Que voulez-vous apprendre ?" autocomplete="off" />
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const assistantPanel = document.getElementById('assistantPanel');
+        const assistantMessages = document.getElementById('assistantMessages');
+        const assistantForm = document.getElementById('assistantForm');
+        const assistantInput = document.getElementById('assistantInput');
+
+        function toggleAssistant() {
+            assistantPanel.classList.toggle('open');
+            const isOpen = assistantPanel.classList.contains('open');
+            assistantPanel.setAttribute('aria-hidden', String(!isOpen));
+            if (isOpen) {
+                assistantInput.focus();
+            }
+        }
+
+        function appendMessage(role, text) {
+            const message = document.createElement('div');
+            message.className = `message ${role}`;
+            message.textContent = text;
+            assistantMessages.appendChild(message);
+            assistantMessages.scrollTop = assistantMessages.scrollHeight;
+        }
+
+        assistantForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const question = assistantInput.value.trim();
+            if (!question) return;
+            appendMessage('user', question);
+            assistantInput.value = '';
+            appendMessage('bot', 'Recherche d’une ressource adaptée...');
+
+            try {
+                const response = await fetch('/assistant', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question }),
+                });
+                const data = await response.json();
+                const botMessages = assistantMessages.querySelectorAll('.message.bot');
+                const lastBot = botMessages[botMessages.length - 1];
+                if (lastBot) {
+                    lastBot.textContent = data.answer || 'Désolé, je n’ai pas de réponse pour le moment.';
+                }
+            } catch (error) {
+                const botMessages = assistantMessages.querySelectorAll('.message.bot');
+                const lastBot = botMessages[botMessages.length - 1];
+                if (lastBot) {
+                    lastBot.textContent = 'Impossible de joindre l’assistant. Vérifiez le serveur.';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Python environment
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+.env*
+
+# IDE folders
+.vscode/
+
+# System files
+.DS_Store
+thumbs.db
+
+# Logs and temporary files
+*.log
+*.sqlite3
+*.db

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent IA DevOps - Formateur Virtuel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .agent-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .skills-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .skill-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            background: #f0f3ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .skill-card h3 {
+            color: #667eea;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .skill-card p {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .capability-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #f0f3ff 0%, #f8f9fa 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .cta-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            color: #555;
+            font-size: 13px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .capabilities {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Agent IA DevOps</h1>
+            <p>Formateur Virtuel Full-Stack</p>
+            <span class="agent-badge">✨ Technologie IA Avancée</span>
+        </div>
+
+        <div class="content">
+            <!-- Domaines de Compétence -->
+            <div class="skills-section">
+                <h2 class="section-title">Domaines d'Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>🐳 Conteneurisation</h3>
+                        <p>Docker, Kubernetes, Orchestration de conteneurs et gestion d'images</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>☁️ Infrastructure Cloud</h3>
+                        <p>AWS, Azure, GCP - Déploiement et gestion d'infrastructure</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🔄 CI/CD & Automatisation</h3>
+                        <p>Jenkins, GitLab CI, GitHub Actions, Pipeline de déploiement</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>📊 Monitoring & Logs</h3>
+                        <p>Prometheus, ELK Stack, Grafana, Observabilité système</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🔐 Sécurité DevOps</h3>
+                        <p>Scanning de vulnérabilités, Gestion des secrets, Hardening</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>💻 Full-Stack Development</h3>
+                        <p>Frontend, Backend, Base de données, Architecture système</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Capabilités -->
+            <div class="skills-section">
+                <h2 class="section-title">Capacités Principales</h2>
+                <div class="capabilities">
+                    <div class="capability-badge">Tutoriels Interactifs</div>
+                    <div class="capability-badge">Débogage Code</div>
+                    <div class="capability-badge">Revue de Pullrequest</div>
+                    <div class="capability-badge">Documentation Technique</div>
+                    <div class="capability-badge">Architecture Design</div>
+                    <div class="capability-badge">Best Practices</div>
+                </div>
+            </div>
+
+            <!-- Ce que Je Peux Faire -->
+            <div class="skills-section">
+                <h2 class="section-title">Services</h2>
+                <ul class="feature-list">
+                    <li>Formation complète en DevOps et Full-Stack Development</li>
+                    <li>Assistance dans la configuration d'environnements de développement</li>
+                    <li>Optimisation des pipelines CI/CD et des workflows</li>
+                    <li>Résolution de problèmes techniques et débogage</li>
+                    <li>Conseils en architecture et bonnes pratiques</li>
+                    <li>Générateur de code et automatisation de tâches</li>
+                    <li>Documentation et tutoriels personnalisés</li>
+                    <li>Support 24/7 pour vos questions techniques</li>
+                </ul>
+            </div>
+
+            <!-- Appel à l'Action -->
+            <div class="cta-section">
+                <h3>Commencez votre Formation DevOps</h3>
+                <p style="color: #666; margin-bottom: 20px; font-size: 14px;">
+                    Je suis ici pour vous guider à travers votre parcours d'apprentissage
+                </p>
+                <button class="btn">Démarrer une Conversation</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Agent IA DevOps Formateur © 2026 | Technologie IA Avancée</p>
+        </div>
+    </div>
+     <script src="main.js"></script>
+</body>
+</html>

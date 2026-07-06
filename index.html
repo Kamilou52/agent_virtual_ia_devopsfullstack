@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent IA DevOps Full-stack - Formateur Virtuel</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --accent: #0ea5e9;
+            --surface: #ffffff;
+            --bg: #f5f7fb;
+            --text: #102a43;
+            --muted: #64748b;
+            --shadow: 0 24px 72px rgba(15, 23, 42, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            background: radial-gradient(circle at top left, #eef2ff 0%, #f8fafc 45%, #ffffff 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            background: var(--bg);
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2.5px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            padding-top: 72px;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1280px;
+            margin: 40px auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            box-shadow: 0 12px 32px rgba(79, 70, 229, 0.24);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(79, 70, 229, 0.32);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg);
+        }
+
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            opacity: 0.85;
+        }
+
+        /* Navigation Cards */
+        .nav-cards {
+            max-width: 1280px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .nav-cards-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .nav-cards-title h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .nav-cards-title p {
+            font-size: 1.05rem;
+            color: var(--muted);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .nav-card {
+            background: var(--surface);
+            padding: 32px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 80px rgba(15, 23, 42, 0.16);
+            border-color: rgba(79, 70, 229, 0.2);
+        }
+
+        .nav-card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+        }
+
+        .nav-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .nav-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .nav-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .nav-card:hover .nav-card-link {
+            gap: 12px;
+        }
+
+        /* Features */
+        .features {
+            max-width: 1280px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .features-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .features-title h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 100px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+            color: white;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            opacity: 0.92;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .hero-visual {
+                font-size: 5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-logo">🤖 DevOps IA</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/training" class="nav-link">Formation</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/demonstrations" class="nav-link">Vidéos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/widget" class="nav-link">À propos</a>
+                </li>
+            </ul>
+            <button class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Transformez votre expertise DevOps</h1>
+            <p>Une plateforme de formation complète, interactive et guidée par un assistant IA virtuel. Apprenez par la pratique avec la méthode PractiKa.</p>
+            <div class="hero-buttons">
+                <a href="/training" class="btn btn-primary">
+                    Commencer la formation →
+                </a>
+                <a href="/demonstrations" class="btn btn-secondary">
+                    Regarder les vidéos
+                </a>
+            </div>
+        </div>
+        <div class="hero-visual">🚀</div>
+    </section>
+
+    <!-- Navigation Cards -->
+    <section class="nav-cards">
+        <div class="nav-cards-title">
+            <h2>Explorez les ressources</h2>
+            <p>Accédez aux différents modules de formation et ressources pédagogiques</p>
+        </div>
+        <div class="cards-grid">
+            <a href="/training" class="nav-card">
+                <div class="nav-card-icon">📚</div>
+                <h3>Formation Complète</h3>
+                <p>Modules interactifs sur DevOps, CI/CD, Docker, Kubernetes, Infrastructure as Code et Monitoring.</p>
+                <span class="nav-card-link">Accéder à la formation →</span>
+            </a>
+
+            <a href="/demonstrations" class="nav-card">
+                <div class="nav-card-icon">🎬</div>
+                <h3>Vidéos avec PédagogIA</h3>
+                <p>Démonstrations vidéo intégrées avec conseils pédagogiques et guides étape par étape.</p>
+                <span class="nav-card-link">Regarder les vidéos →</span>
+            </a>
+
+            <a href="/resources/practika" class="nav-card" target="_blank">
+                <div class="nav-card-icon">📄</div>
+                <h3>Ressource PractiKa</h3>
+                <p>Téléchargez le document de stage avec le cas pratique Ubuntu 24.10, Shinobi et Axis IP.</p>
+                <span class="nav-card-link">Ouvrir le PDF →</span>
+            </a>
+
+            <a href="/resources/AutodidaKtIA" class="nav-card" target="_blank">
+                <div class="nav-card-icon">📄</div>
+                <h3>Ressource AutodidaKtIA</h3>
+                <p>Cliquer pour aller sur le site EPFL Extension School : https://www.epfl.ch/education/continuing-education/fr/formations-en-ligne/
+                    .</p>
+                <span class="nav-card-link">Ouvrir le PDF →</span>
+            </a>
+
+            <a href="/widget" class="nav-card">
+                <div class="nav-card-icon">🤖</div>
+                <h3>À Propos</h3>
+                <p>En savoir plus sur l'agent IA, ses capacités et son rôle dans votre formation.</p>
+                <span class="nav-card-link">Découvrir →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="features-title">
+            <h2>Pourquoi cette plateforme ?</h2>
+            <p>Une approche complète combinant théorie, pratique et guidance IA</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Apprentissage par la pratique</h3>
+                <p>La méthode PractiKa met l'accent sur faire, documenter et améliorer continuellement.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Cas réels</h3>
+                <p>Basé sur un projet stage concret : configuration de serveur de surveillance avec Shinobi.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Assistant IA</h3>
+                <p>Un chatbot flottant disponible sur chaque page pour poser vos questions en temps réel.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Tech Stack moderne</h3>
+                <p>Docker, Kubernetes, CI/CD, Terraform, Monitoring et bien plus encore.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Ressources variées</h3>
+                <p>Modules en ligne, vidéos, documentation PDF et support d'assistant IA.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Formation complète</h3>
+                <p>Du débutant à l'expert : concepts fondamentaux, configurations avancées et optimisations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Agent IA DevOps Full-stack | Formation PractiKa | Apprendre en faisant</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                const navMenu = document.querySelector('.nav-menu');
+                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+    </script>
+</body>
+</html>

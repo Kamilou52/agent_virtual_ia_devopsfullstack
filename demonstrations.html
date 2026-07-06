@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démonstrations Vidéo - PédagogIA</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --accent: #0ea5e9;
+            --surface: #ffffff;
+            --bg: #f5f7fb;
+            --text: #102a43;
+            --muted: #64748b;
+            --shadow: 0 24px 72px rgba(15, 23, 42, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, sans-serif;
+            background: radial-gradient(circle at top left, #eef2ff 0%, #f8fafc 45%, #ffffff 100%);
+            color: var(--text);
+        }
+
+        .wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 32px 20px 100px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+            padding: 34px;
+            background: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+            border-radius: 26px;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            margin: 0 0 16px;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.92);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .agent-intro {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            margin-top: 20px;
+        }
+
+        .agent-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .agent-card {
+            flex: 1;
+        }
+
+        .agent-card strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .agent-card small {
+            opacity: 0.88;
+            font-size: 0.92rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 48px 0 24px;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .section-title span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+        }
+
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .demo-card {
+            background: var(--surface);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            transition: transform 0.24s ease, box-shadow 0.24s ease;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 32px 80px rgba(15, 23, 42, 0.16);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .dual-videos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .dual-videos .video-container {
+            padding-bottom: 56.25%;
+        }
+
+        .demo-content {
+            padding: 24px;
+        }
+
+        .demo-content h3 {
+            margin: 0 0 12px;
+            color: var(--primary);
+            font-size: 1.16rem;
+        }
+
+        .demo-content p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 0.98rem;
+        }
+
+        .tag-list {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .pedagog-tips {
+            margin: 48px 0;
+            padding: 24px;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(14, 165, 233, 0.08) 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+        }
+
+        .pedagog-tips h3 {
+            margin: 0 0 16px;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .pedagog-tips ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text);
+            line-height: 1.75;
+        }
+
+        .pedagog-tips li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            margin-top: 52px;
+            padding: 26px 22px;
+            background: white;
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .demos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .media-gallery {
+  display: grid;
+  gap: 15px;
+}
+
+.main-media {
+  aspect-ratio: 16/9;
+  background: #f5f5f5;
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 10px;
+}
+
+.gallery-thumbs img, .video-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.video-thumb {
+  position: relative;
+  background: #eee;
+}
+
+.video-thumb svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+<div class="product-container">
+  <!-- Galerie Principale -->
+  <div class="media-gallery">
+    <div class="main-media">
+      <img id="main-display" src="default-image.jpg" alt="Produit">
+      <video id="video-player" controls style="display:none;"></video>
+    </div>
+    
+    <!-- Thumbnails Dynamiques -->
+    <div class="gallery-thumbs">
+      <!-- Généré dynamiquement -->
+    </div>
+  </div>
+
+  <!-- Contenu Produit -->
+  <div class="product-details">
+    <h1>Nom du Produit</h1>
+    ...
+  </div>
+</div>
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Démonstrations Vidéo</h1>
+                <p>Explorez des cas pratiques en vidéo avec des experts en DevOps et Full-Stack Development.</p>
+                <div class="agent-intro">
+                    <div class="agent-avatar">🎓</div>
+                    <div class="agent-card">
+                        <strong>PédagogIA</strong>
+                        <small>Votre guide pédagogique en vidéo</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-title"><span>1</span> Vidéos DevOps et Infrastructure</div>
+        <div class="demos-grid">
+            <div class="demo-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/fqMOX6JJhGo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="demo-content">
+                    <h3>Introduction à Docker</h3>
+                    <p>Comprenez les bases de Docker, les conteneurs et comment les utiliser pour isoler vos applications.</p>
+                    <div class="tag-list"><span class="tag">Docker</span><span class="tag">Conteneurs</span><span class="tag">Débutant</span></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="dual-videos">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/RJ65dDQUmQg?si=KN7nyWRwAFUb82DR" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/s_o8dwzRlu4?si=hNCaa8JkOiCVE76g" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <h3>Kubernetes 101</h3>
+                    <p>Découvrez l'orchestration de conteneurs avec Kubernetes et comment déployer vos applications à l'échelle.</p>
+                    <div class="tag-list"><span class="tag">Kubernetes</span><span class="tag">Orchestration</span><span class="tag">Production</span></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="dual-videos">
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/mhw7eyTA4KQ?si=Qmn07Q-D6Zg_qo5n" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/vJkaJ6k54AQ?si=aoYGp-nK_Kahq6Bc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+<div class="demo-content">
+                    <h3>CI/CD avec GitHub Actions</h3>
+                    <p>Créez des pipelines d'intégration et de déploiement continus pour automatiser votre flux de travail.</p>
+                    <div class="tag-list"><span class="tag">CI/CD</span><span class="tag">GitHub Actions</span><span class="tag">Automatisation</span></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/bLImb2jzfvk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="demo-content">
+                    <h3>Terraform et Infrastructure as Code</h3>
+                    <p>Apprenez à décrire votre infrastructure en code et à la déployer de manière reproductible.</p>
+                    <div class="tag-list"><span class="tag">Terraform</span><span class="tag">IaC</span><span class="tag">Cloud</span></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/9wvEwQvZfT4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="demo-content">
+                    <h3>Installation et Configuration Ubuntu Server</h3>
+                    <p>Installez et configurez un serveur Ubuntu pour les projets DevOps et le déploiement d'applications.</p>
+                    <div class="tag-list"><span class="tag">Ubuntu</span><span class="tag">Linux</span><span class="tag">Serveur</span></div>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ZtqBvwkrSeQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="demo-content">
+                    <h3>Monitoring avec Prometheus et Grafana</h3>
+                    <p>Mettez en place une stack complète de monitoring pour surveiller vos applications et infrastructures.</p>
+                    <div class="tag-list"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Monitoring</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title"><span>2</span> Conseils de PédagogIA</div>
+        <div class="pedagog-tips">
+            <h3>🎯 Comment utiliser ces démonstrations</h3>
+            <ul>
+                <li><strong>Regardez la première fois</strong> pour comprendre les concepts généraux.</li>
+                <li><strong>Testez en même temps</strong> : reproduisez les étapes sur votre machine locale.</li>
+                <li><strong>Pausez et répétez</strong> si une étape n'est pas claire.</li>
+                <li><strong>Adaptez au contexte</strong> de votre projet, ne copiez pas aveuglément.</li>
+                <li><strong>Documentez ce que vous apprenez</strong> selon la méthode PractiKa.</li>
+                <li><strong>Partagez vos expériences</strong> avec l'assistant IA flottant pour du feedback.</li>
+            </ul>
+        </div>
+
+        <div class="section-title"><span>3</span> Ressources supplémentaires</div>
+        <div class="demos-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <article style="background: var(--surface); padding: 24px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid rgba(15, 23, 42, 0.06);">
+                <h3 style="color: var(--primary); margin: 0 0 12px;">Retournez aux modules</h3>
+                <p style="margin: 0; color: var(--muted); line-height: 1.75;">Explorez les cas pratiques et ressources complètes de formation.</p>
+                <div style="margin-top: 16px;">
+                    <a href="/training" style="color: var(--primary); text-decoration: none; font-weight: 700;">Aller à la formation →</a>
+                </div>
+            </article>
+
+            <article style="background: var(--surface); padding: 24px; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid rgba(15, 23, 42, 0.06);">
+                <h3 style="color: var(--primary); margin: 0 0 12px;">Accueil principal</h3>
+                <p style="margin: 0; color: var(--muted); line-height: 1.75;">Retour au portail principal avec les informations et caractéristiques.</p>
+                <div style="margin-top: 16px;">
+                    <a href="/" style="color: var(--primary); text-decoration: none; font-weight: 700;">Aller à l'accueil →</a>
+                </div>
+            </article>
+        </div>
+
+        <footer>
+            <p>PédagogIA | Démonstrations Vidéo © 2026 | Apprendre DevOps par la pratique</p>
+        </footer>
+    </div>
+</body>
+</html>
